@@ -1,5 +1,5 @@
 import { n as TSS_SERVER_FUNCTION, t as createServerFn } from "./ssr.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/tasks-Bqjlw-U3.js
+//#region node_modules/.nitro/vite/services/ssr/assets/tasks-BZl1YjUx.js
 var createServerRpc = (serverFnMeta, splitImportFn) => {
 	const url = "/_serverFn/" + serverFnMeta.id;
 	return Object.assign(splitImportFn, {
@@ -112,25 +112,11 @@ function createNeonSql() {
 async function createPgliteSql() {
 	globalRef.__pgliteInstance__ ??= (async () => {
 		const { PGlite } = await import("../_libs/electric-sql__pglite.mjs").then((n) => n.t);
-		const { readFile } = await import("node:fs/promises");
-		const { createRequire } = await import("node:module");
-		const { dirname, join } = await import("node:path");
-		const distDir = dirname(createRequire(import.meta.url).resolve("@electric-sql/pglite"));
-		const [data, wasm, initdb] = await Promise.all([
-			readFile(join(distDir, "pglite.data")),
-			readFile(join(distDir, "pglite.wasm")),
-			readFile(join(distDir, "initdb.wasm"))
-		]);
-		const pg = new PGlite({
-			fsBundle: new Blob([new Uint8Array(data)]),
-			pgliteWasmModule: await WebAssembly.compile(wasm),
-			initdbWasmModule: await WebAssembly.compile(initdb),
-			parsers: {
-				[OID_INT8]: Number,
-				[OID_DATE]: identity,
-				[OID_INTERVAL]: identity
-			}
-		});
+		const pg = new PGlite({ parsers: {
+			[OID_INT8]: Number,
+			[OID_DATE]: identity,
+			[OID_INTERVAL]: identity
+		} });
 		await pg.waitReady;
 		await pg.exec("create table if not exists _migrations (name text primary key, applied_at timestamptz not null default now())");
 		return pg;

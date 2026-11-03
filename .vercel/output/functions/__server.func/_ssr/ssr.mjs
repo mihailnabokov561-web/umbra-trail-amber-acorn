@@ -125,23 +125,23 @@ async function getStartManifest(matchedRoutes) {
 var manifest = {
 	"493f771b655b5673b8610b879d538e33d2dc9388ea15b64e1a3069b326d5718b": {
 		functionName: "getBoard_createServerFn_handler",
-		importer: () => import("./tasks-Bqjlw-U3.mjs")
+		importer: () => import("./tasks-BZl1YjUx.mjs")
 	},
 	"81f6f9c980e82ada8bb07ee645985c614c3716908db1f30e1321ebf8d2d0067a": {
 		functionName: "renameTask_createServerFn_handler",
-		importer: () => import("./tasks-Bqjlw-U3.mjs")
+		importer: () => import("./tasks-BZl1YjUx.mjs")
 	},
 	"a5bf4681e69d8874a10e0ef347b00c7f0821bf7043f8afa40801854a7bc57b67": {
 		functionName: "createTask_createServerFn_handler",
-		importer: () => import("./tasks-Bqjlw-U3.mjs")
+		importer: () => import("./tasks-BZl1YjUx.mjs")
 	},
 	"c559386a21dd47ad490ab40d4d409785d6ab536eca39014681e23f3cec95e387": {
 		functionName: "deleteTask_createServerFn_handler",
-		importer: () => import("./tasks-Bqjlw-U3.mjs")
+		importer: () => import("./tasks-BZl1YjUx.mjs")
 	},
 	"db07159ca15a9cc6be147ab6c1775236944342cca5e5a6f84a29926f0fad2d18": {
 		functionName: "moveTask_createServerFn_handler",
-		importer: () => import("./tasks-Bqjlw-U3.mjs")
+		importer: () => import("./tasks-BZl1YjUx.mjs")
 	}
 };
 async function getServerFnById(id, access) {

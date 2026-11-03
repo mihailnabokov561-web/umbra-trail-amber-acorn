@@ -111,23 +111,7 @@ async function createPgliteSql(): Promise<Sql> {
   // data survives source edits (it resets on dev-server restart).
   globalRef.__pgliteInstance__ ??= (async () => {
     const { PGlite } = await import("@electric-sql/pglite");
-    const { readFile } = await import("node:fs/promises");
-    const { createRequire } = await import("node:module");
-    const { dirname, join } = await import("node:path");
-    // Nitro bundles this module away from the package, so the default
-    // ./pglite.data lookup next to the bundle 404s. Load the assets from the
-    // installed package instead (same files dev uses).
-    const require = createRequire(import.meta.url);
-    const distDir = dirname(require.resolve("@electric-sql/pglite"));
-    const [data, wasm, initdb] = await Promise.all([
-      readFile(join(distDir, "pglite.data")),
-      readFile(join(distDir, "pglite.wasm")),
-      readFile(join(distDir, "initdb.wasm")),
-    ]);
     const pg = new PGlite({
-      fsBundle: new Blob([new Uint8Array(data)]),
-      pgliteWasmModule: await WebAssembly.compile(wasm),
-      initdbWasmModule: await WebAssembly.compile(initdb),
       parsers: {
         [OID_INT8]: Number,
         [OID_DATE]: identity,
